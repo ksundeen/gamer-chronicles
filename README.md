@@ -9,6 +9,7 @@ This application shows the geovisualizations of any favorite video, card, or boa
 3. To inspire new or modified game ideas.
 4. To see where in the world different game ideas were originally generated or created.
 5. Identify hubs of creativity in the gaming world.
+6. To search, filter, and navigate around the map to find games for learning about and trying out.
 
 # Tech Stack
 ## Frontend
@@ -112,9 +113,8 @@ Follow this setup to contribute and build it locally.
     >>pip install --upgrade pip
     >>```
     >> 2. Install dependencies for the app.
-    >>
     >>```bash
-    >>pip install fastapi uvicorn psycopg2-binary sqlalchemy alembic pydantic bcrypt python-multipart pillow
+    >>pip install fastapi uvicorn psycopg2-binary sqlalchemy alembic pydantic bcrypt python-multipart pillow psycopg2-binary
     >>```
     >> Or install from the requirements.txt (or if there's no requirements.txt file, simply run `pip freeze > requirements.txt`)
     >>```bash
@@ -127,6 +127,7 @@ Follow this setup to contribute and build it locally.
     >>```
     >> 4. Set up PostgreSQL database. **See PostgreSQL Docker Container section 3 for running a local instance of PostgreSQL**.
     >>```sql
+    >>-- Create generic gamer user 
     >>CREATE DATABASE gamer_chronicles;
     >>CREATE USER game_user WITH PASSWORD 'securepassword';
     >>ALTER ROLE game_user SET client_encoding TO 'utf8';
@@ -174,6 +175,11 @@ Follow this setup to contribute and build it locally.
 Check if Docker is already installed locally. You'll need it installed locally to create any images and running those images as containers.
 ```bash
 docker --version
+
+# Pull latest postgres docker image
+docker pull postgres
+
+# If 
 ```
 
 Run the Docker container with PostgreSQL and the configs with:
@@ -195,10 +201,21 @@ docker rm - postgres_container
 
 Configure FastAPI to Connect to the PostgreSQL Container:
 ```python
-DATABASE_URL = "postgresql://admin:admin@localhost:5432/gamer_chronicles"
+DATABASE_URL = "postgresql://admin:adminpass@localhost:5432/gamer_chronicles"
 ```
 
 Install the PostgreSQL python adapter into python packages:
 ```bash
 pip install psycopg2-binary
+```
+Alternatively, run the postgres container using the docker-compose.yaml file:
+```bash
+# Run attached to the container
+docker-compose up
+
+# Run the container in the background
+docker-compose up -d
+
+# Exec into the running postgres container if you need to check the network or run plsql commands directly. Also download pgAdmin to help troubleshoot any connections, which provides a nice GUI for managing postreSQL databases.
+docker exec -it postgres_container psql -U admin -d gamer_chronicles
 ```

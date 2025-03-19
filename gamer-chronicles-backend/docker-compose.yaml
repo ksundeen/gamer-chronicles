@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  postgres_container:
+    image: postgres:latest
+    container_name: postgres_container
+    restart: unless-stopped
+
+    environment: # various environmental variables
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: adminpass
+      POSTGRES_DB: gamer_chronicles
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data # Stores data
+
+volumes:
+  postgres_data:
