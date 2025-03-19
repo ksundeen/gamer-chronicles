@@ -100,7 +100,7 @@ Follow this setup to contribute and build it locally.
     >>
     >>```bash
     >># Create virtual environment.
-    >>python -m venv venv
+    >>python3 -m venv venv
     >>
     >># On Windows:
     >>venv\Scripts\activate

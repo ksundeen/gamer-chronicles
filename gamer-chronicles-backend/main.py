@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from database import engine, get_db
 from models import Base
 from schemas import UserCreate, UserResponse, GameDataCreate, GameDataUpdate
-from auth import create_access_token, get_current_user, verify_password
+from auth import create_access_token, get_current_user, verify_password, get_password_hash
 from crud import create_user, create_game_data
 import shutil
 
@@ -13,14 +13,15 @@ Base.metadata.create_all(bind=engine)
 
 @app.post("/register/", response_model=UserResponse)
 def register_user(user: UserCreate, db: Session = Depends(get_db)):
-    return create_user(db, user)
+    user_data = create_user(db, user)
+    return user_data
 
 @app.post("/login/")
 def login(username: str, password: str, db: Session = Depends(get_db)):
     user = db.query(User).filter(User.username == username).first()
     if not user or not verify_password(password, user.hashed_password):
         raise HTTPException(status_code=401, detail="Invalid credentials")
-    token = create_access_token({"sub": username}, timedelta(minutes=30))
+    token = create_access_token(username)
     return {"token": token}
 
 @app.post("/game/create/")
