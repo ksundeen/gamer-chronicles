@@ -125,14 +125,14 @@ Follow this setup to contribute and build it locally.
     >>```bash
     >>pip install pytest pyjwt httpx pytest-asyncio
     >>```
-    >> 4. Set up PostgreSQL database.
+    >> 4. Set up PostgreSQL database. **See PostgreSQL Docker Container section 3 for running a local instance of PostgreSQL**.
     >>```sql
-    >>CREATE DATABASE game_app;
+    >>CREATE DATABASE gamer_chronicles;
     >>CREATE USER game_user WITH PASSWORD 'securepassword';
     >>ALTER ROLE game_user SET client_encoding TO 'utf8';
     >>ALTER ROLE game_user SET default_transaction_isolation TO 'read committed';
     >>ALTER ROLE game_user SET timezone TO 'UTC';
-    >>GRANT ALL PRIVILEGES ON DATABASE game_app TO game_user;
+    >>GRANT ALL PRIVILEGES ON DATABASE gamer_chronicles TO game_user;
     >>```
     >> 5. This makes a project structure of:
     >>```pgsql
@@ -169,3 +169,36 @@ Follow this setup to contribute and build it locally.
     >>```bash
     >>pytest -v tests/
     >>```
+
+3. Run a local Docker container of PostgreSQL.
+Check if Docker is already installed locally. You'll need it installed locally to create any images and running those images as containers.
+```bash
+docker --version
+```
+
+Run the Docker container with PostgreSQL and the configs with:
+```bash
+docker run --name postgres_container -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=adminpass -e POSTGRES_DB=gamer_chronicles -p 5432:5432 -d postgres
+```
+
+Stop, Restart, & Remove PostgreSQL Container
+```bash
+# Stop postgresql
+docker stop postgres_container
+
+# Start postgresql
+docker start postgres_container
+
+# Remove postgresql
+docker rm - postgres_container
+```
+
+Configure FastAPI to Connect to the PostgreSQL Container:
+```python
+DATABASE_URL = "postgresql://admin:admin@localhost:5432/gamer_chronicles"
+```
+
+Install the PostgreSQL python adapter into python packages:
+```bash
+pip install psycopg2-binary
+```
