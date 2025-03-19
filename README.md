@@ -114,16 +114,16 @@ Follow this setup to contribute and build it locally.
     >> 2. Install dependencies for the app.
     >>
     >>```bash
-    >>pip install fastapi uvicorn psycopg2-binary sqlalchemy alembic pydantic bcrypt python-multipart python-jose[cryptography] pillow\
+    >>pip install fastapi uvicorn psycopg2-binary sqlalchemy alembic pydantic bcrypt python-multipart pillow
     >>```
-    >> Or install from the requirements.txt
+    >> Or install from the requirements.txt (or if there's no requirements.txt file, simply run `pip freeze > requirements.txt`)
     >>```bash
     >>pip install -r requirements.txt
     >>```
     >>
     >> 3. Install dependencies for unit testing.
     >>```bash
-    >>pip install pytest httpx pytest-asyncio
+    >>pip install pytest pyjwt httpx pytest-asyncio
     >>```
     >> 4. Set up PostgreSQL database.
     >>```sql
