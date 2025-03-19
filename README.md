@@ -1,7 +1,7 @@
 # Gamer Chronicles
 
 ## Purpose of Gamer Chronicles
-This application shows the geovisualizations of any favorite video, card, or board games that users are willing to share any details about and statistics associated with them. The application will prompt the user to enter these attributes about a game: title, creator, manufacturer, original release date, summary or game, game genre (playing characteristics), and game type (video, card, or board game). The one requirement is that the location entered is the original location where the game idea was developed, not where the game was produced or manufactured. The goal is to identify hubs of gamer creativity where games were created. 
+This application shows the geovisualizations of any favorite video, card, or board games that users are willing to share any details about and statistics associated with them. The application will prompt the user to enter these attributes about a game: title, creator, manufacturer, original release date, summary or game, game genre (playing characteristics), and game type (video, card, or board game). The one requirement is that the location entered is the original location where the game idea was developed, not where the game was produced or manufactured. The goal is to identify hubs of gamer creativity where games were created, which games are of interest, and types of games to search for and learn about.
 
 ## Goals of Gamer Chronicles
 1. To connect users interested in digital (video, streaming) and analog (board, cards) gaming globally to share favorite and memorable game titles. 
