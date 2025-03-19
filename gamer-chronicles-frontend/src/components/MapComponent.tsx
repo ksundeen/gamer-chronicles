@@ -1,7 +1,7 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
-import SidePanel from "./SidePanel";
+import SidePanel from "./panel/SidePanel";
 
 const geojsonData = {
   type: "FeatureCollection",
@@ -55,6 +55,25 @@ const geojsonData = {
 const MapComponent = () => {
   const mapContainer = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<maplibregl.Map | null>(null); // Store the map instance
+  const [geojsonData, setGeojsonData] = useState(null);
+
+  useEffect(() => {
+    // Fetch GeoJSON data from REST endpoint
+    const fetchGeoJSON = async () => {
+      try {
+        const response = await fetch("https://your-api-endpoint.com/geojson"); // Replace with your actual API endpoint
+        if (!response.ok) {
+          throw new Error("Failed to fetch data");
+        }
+        const data = await response.json();
+        setGeojsonData(data);
+      } catch (error) {
+        console.error("Error fetching GeoJSON:", error);
+      }
+    };
+
+    fetchGeoJSON();
+  }, []);
 
   useEffect(() => {
     if (!mapContainer.current || mapRef.current) return; // Ensure container exists and prevent re-initialization
@@ -63,7 +82,7 @@ const MapComponent = () => {
       container: mapContainer.current,
       style: "https://demotiles.maplibre.org/style.json",
       center: [9.0000, 53.0000],
-      zoom: 10
+      zoom: 5
     });
 
     map.addControl(new maplibregl.NavigationControl(), "top-right");
