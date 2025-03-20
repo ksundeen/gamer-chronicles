@@ -11,6 +11,9 @@ This application shows the geovisualizations of any favorite video, card, or boa
 5. Identify hubs of creativity in the gaming world.
 6. To search, filter, and navigate around the map to find games for learning about and trying out.
 
+## Wireframe Design
+<img src="assets/GamerChroniclesDesign.png" alt="Alt text" width="600" style="display: block; margin: auto;">
+
 # Tech Stack
 ## Frontend
 This is a React Typescript with a Material UI Styling solution Single Page Application (SPA) with operations that allow users to 
