@@ -158,7 +158,7 @@ Follow this setup to contribute and build it locally.
     >>```
     >> 3. Configure Alembic. Edit `alembic.ini` and update the database URL:
     >>```bash
-    >>sqlalchemy.url = postgresql+asyncpg://admin:adminpass@localhost/gamer_chronicles
+    >>sqlalchemy.url = postgresql+psycopg2://admin:adminpass@localhost/gamer_chronicles
     >>```
     >> 4. Generate a Migration by running:
     >>```bash
