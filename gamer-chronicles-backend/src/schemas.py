@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 from typing import Optional, List
 
-### 🔹 User Schemas ###
+### User Schemas ###
 class UserCreate(BaseModel):
     username: str
     email: str
@@ -13,25 +13,25 @@ class UserResponse(BaseModel):
     email: str
 
     class Config:
-        from_attributes = True  # ✅ Enables ORM mode for SQLAlchemy
+        from_attributes = True
 
 class UserUpdate(BaseModel):
     email: Optional[str] = None
-    password: Optional[str] = None  # ✅ Allow updating password
+    password: Optional[str] = None
 
-### 🔹 GameData Schemas ###
+### GameData Schemas ###
 class GameDataCreate(BaseModel):
     latitude: float
     longitude: float
     title: str
     description: Optional[str] = None
-    game_genre: List[str]  # ✅ Matches `ARRAY(String)` in the database
+    game_genre: List[str]
     game_type: List[str]
     number_players: List[str]
     play_time: List[str]
     first_released_location: Optional[str] = None
     first_published_year: int
-    image: Optional[str] = None  # ✅ Allow optional image
+    image: Optional[str] = None
 
 class GameDataResponse(BaseModel):
     id: int
@@ -49,7 +49,7 @@ class GameDataResponse(BaseModel):
     user_id: int
 
     class Config:
-        from_attributes = True  # ✅ Enables ORM mode for SQLAlchemy
+        from_attributes = True  # Enables ORM mode for SQLAlchemy
 
 class GameDataUpdate(BaseModel):
     title: Optional[str] = None
